@@ -1,14 +1,17 @@
 package ro.spital.builder;
 
-public class PacientBuilder {
+public class PacientBuilder{
     private String nume;
     private boolean patRabatabil = false;
-    private boolean micDejunInclus = false;
-    private boolean papuciCamera = false;
-    private boolean halatInterior = false;
+    private boolean micDejunInclus= false;
+    private boolean papuciCamera= false;
+    private boolean halatInterior=false;
 
-    public PacientBuilder(String nume) {
-        this.nume = nume;
+    // Constructor care primeste numele pacientului
+    // fiecare metoda seteaza o anumita facilitate si returneaza instanta curenta (this) permitand
+    //apeluri in lant.
+    public PacientBuilder(String nume){
+        this.nume=nume;
     }
 
     public PacientBuilder setPatRabatabil(boolean patRabatabil) {
@@ -31,7 +34,8 @@ public class PacientBuilder {
         return this;
     }
 
-    public Pacient build() {
-        return new Pacient(nume, patRabatabil, micDejunInclus, papuciCamera, halatInterior);
+    public Pacient build()
+    {
+        return new Pacient (nume, patRabatabil, micDejunInclus,papuciCamera, halatInterior);
     }
 }
