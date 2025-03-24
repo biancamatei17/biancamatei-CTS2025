@@ -1,4 +1,4 @@
-package ro.spital.factory;
+package ro.spital.models;
 
 public enum TipPersonal {
 

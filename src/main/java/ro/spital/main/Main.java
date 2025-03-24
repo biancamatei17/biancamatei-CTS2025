@@ -3,10 +3,12 @@ import ro.spital.builder.Pacient;
 import ro.spital.builder.PacientBuilder;
 import ro.spital.factory.FactoryPersonal;
 import ro.spital.factory.PersonalSpital;
-import ro.spital.factory.TipPersonal;
 import ro.spital.factoryPattern.*;
+import ro.spital.models.TipPersonal;
 import ro.spital.prototype.Reteta;
 import ro.spital.prototype.RetetaRegistry;
+import ro.spital.factoryPattern.FactoryPersonalFactPattern;
+import ro.spital.prototypeC4.RetetaMedicament;
 
 public class Main {
     public static void main(String[] args) {
@@ -28,9 +30,9 @@ public class Main {
 
         System.out.println ();
         // Factory
-        PersonalSpital brancardier = FactoryPersonal.createPersonal(TipPersonal.BRANCARDIER, "Ion Popescu");
-        PersonalSpital asistent = FactoryPersonal.createPersonal(TipPersonal.ASISTENT,"Maria Ionescu");
-        PersonalSpital medic = FactoryPersonal.createPersonal(TipPersonal.MEDIC,"Vasile Georgescu");
+        PersonalSpital brancardier = FactoryPersonal.createPersonal(ro.spital.factory.TipPersonal.BRANCARDIER, "Ion Popescu");
+        PersonalSpital asistent = FactoryPersonal.createPersonal(ro.spital.factory.TipPersonal.ASISTENT,"Maria Ionescu");
+        PersonalSpital medic = FactoryPersonal.createPersonal(ro.spital.factory.TipPersonal.MEDIC,"Vasile Georgescu");
 
         brancardier.descriere();
         asistent.descriere();
@@ -40,20 +42,11 @@ public class Main {
 
     // Factory Pattern
 
-        FactoryPersonalInterface factoryBrancardier = new FactoryBrancardier();
-        FactoryPersonalInterface factoryAsistent = new FactoryAsistent();
-        FactoryPersonalInterface factoryMedic = new FactoryMedic();
-        FactoryPersonalInterface factoryFarmacist = new FactoryFarmacist();
+        PersonalSpitalPattern asistent1 = FactoryPersonalFactPattern.crearePersonal(TipPersonal.ASISTENT, "Ion Popescu");
+        PersonalSpitalPattern medic1 = FactoryPersonalFactPattern.crearePersonal(TipPersonal.MEDIC, "Maria Ionescu");
 
-        PersonalSpitalPattern brancardier2= factoryBrancardier.crearePersonal("Ion Popescu");
-        PersonalSpitalPattern asistent2= factoryAsistent.crearePersonal("Maria Ionescu");
-        PersonalSpitalPattern medic2= factoryMedic.crearePersonal("Andrei Georgescu");
-        PersonalSpitalPattern farmacist = factoryFarmacist.crearePersonal("Angelica Ionica");
-
-        brancardier2.descriere();
-        asistent2.descriere();
-        medic2.descriere();
-        farmacist.descriere();
+        asistent.descriere();
+        medic.descriere();
 
         System.out.println ();
         // prototype
@@ -75,6 +68,30 @@ public class Main {
             System.out.println("Reteta nu a fost gasita.");
         }
 
+        System.out.println ();
+
+        //Prototype Cerinta 4 (C4)
+        // Creăm o rețetă inițială
+        RetetaMedicament retetaOriginala2 = new RetetaMedicament("Paracetamol");
+        retetaOriginala2.adaugaIngredient("Paracetamol", 500.0);
+        retetaOriginala2.adaugaIngredient("Zaharina", 10.0);
+
+        System.out.println("Rețeta Originală:");
+        retetaOriginala2.afisareReteta();
+
+        // Clonăm rețeta
+        RetetaMedicament retetaCopiata2 = (RetetaMedicament) retetaOriginala2.clone();
+        System.out.println("\nRețeta Clonată:");
+        retetaCopiata2.afisareReteta();
+
+        // Modificăm rețeta clonată și verificăm că nu afectează originalul
+        retetaCopiata2.adaugaIngredient("Vitamina C", 50.0);
+        System.out.println("\nRețeta Clonată după modificare:");
+        retetaCopiata2.afisareReteta();
+
+        System.out.println("\nRețeta Originală rămâne neschimbată:");
+        retetaOriginala2.afisareReteta();
     }
 }
+
 
