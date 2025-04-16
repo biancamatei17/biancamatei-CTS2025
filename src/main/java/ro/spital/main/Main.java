@@ -1,4 +1,7 @@
 package ro.spital.main;
+import ro.spital.adapter.IMedicament;
+import ro.spital.adapter.MedicamentAdapter;
+import ro.spital.adapter.MedicamentFarmacie;
 import ro.spital.builder.Pacient;
 import ro.spital.builder.PacientBuilder;
 import ro.spital.factory.FactoryPersonal;
@@ -51,17 +54,17 @@ public class Main {
         System.out.println ();
         // prototype
 
-        // Inițializăm registry-ul
+        // Inițializam registry-ul
         RetetaRegistry registry = new RetetaRegistry();
 
-        // Creăm o rețetă și o adăugăm în registry
+        // Cream o reteta si o adaugam in registry
         Reteta reteta1 = new Reteta("Antibiotic", "Substanta X, Substanta Y", 5.0);
         registry.adaugaReteta("Antibiotic", reteta1);
 
-        // Obținem o copie a rețetei fără a apela constructorul
+        // Obtinem o copie a retetei fara a apela constructorul
         Reteta retetaCopiata = registry.obtineReteta("Antibiotic");
 
-        // Afișăm rețeta copiată
+        // Afisam reteta copiata
         if (retetaCopiata != null) {
             retetaCopiata.afiseazaReteta();
         } else {
@@ -71,26 +74,45 @@ public class Main {
         System.out.println ();
 
         //Prototype Cerinta 4 (C4)
-        // Creăm o rețetă inițială
+        // Cream o reteta initiala
         RetetaMedicament retetaOriginala2 = new RetetaMedicament("Paracetamol");
         retetaOriginala2.adaugaIngredient("Paracetamol", 500.0);
         retetaOriginala2.adaugaIngredient("Zaharina", 10.0);
 
-        System.out.println("Rețeta Originală:");
+        System.out.println("Reteta Originala:");
         retetaOriginala2.afisareReteta();
 
-        // Clonăm rețeta
+        // Clonăm reteta
         RetetaMedicament retetaCopiata2 = (RetetaMedicament) retetaOriginala2.clone();
-        System.out.println("\nRețeta Clonată:");
+        System.out.println("\nReteta Clonata:");
         retetaCopiata2.afisareReteta();
 
-        // Modificăm rețeta clonată și verificăm că nu afectează originalul
+        // Modificam reteta clonata si verific ca nu afecteaza originalul
         retetaCopiata2.adaugaIngredient("Vitamina C", 50.0);
-        System.out.println("\nRețeta Clonată după modificare:");
+        System.out.println("\nReteta modificata dupa clonare:");
         retetaCopiata2.afisareReteta();
 
-        System.out.println("\nRețeta Originală rămâne neschimbată:");
+        System.out.println("\nReteta originala ramane neschimbata:");
         retetaOriginala2.afisareReteta();
+        System.out.println();
+        // Cernta 5
+
+        MedicamentFarmacie medicamentFarmacie = new MedicamentFarmacie();
+        IMedicament medicament = new MedicamentAdapter(medicamentFarmacie);
+
+        medicament.achizitioneazaMedicament();
+
+        // Cerinta 6 - Facade
+        System.out.println();
+
+        ro.spital.facade.PacientFacade pacientInternat = new ro.spital.facade.PacientFacade("Adrian Pop", true);
+        ro.spital.facade.MedicFacade medicInternare = new ro.spital.facade.MedicFacade();
+        ro.spital.facade.Salon salon = new ro.spital.facade.Salon(2);
+
+        ro.spital.facade.InternareFacade internare = new ro.spital.facade.InternareFacade();
+        internare.interneazaPacient(pacientInternat, medicInternare, salon);
+
+
     }
 }
 
