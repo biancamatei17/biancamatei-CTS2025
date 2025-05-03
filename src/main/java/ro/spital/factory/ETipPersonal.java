@@ -1,6 +1,6 @@
-package ro.spital.models;
+package ro.spital.factory;
 
-public enum TipPersonal {
+public enum ETipPersonal {
 
     ASISTENT,
     BRANCARDIER,

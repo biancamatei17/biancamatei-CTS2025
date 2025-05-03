@@ -1,7 +1,7 @@
 package ro.spital.factory;
 
 public class FactoryPersonal {
-    public static PersonalSpital createPersonal(TipPersonal tip, String nume)
+    public static PersonalSpital createPersonal(ETipPersonal tip, String nume)
     {
         switch (tip)
         {

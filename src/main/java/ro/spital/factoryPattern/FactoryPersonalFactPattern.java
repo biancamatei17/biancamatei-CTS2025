@@ -1,9 +1,9 @@
 package ro.spital.factoryPattern;
 
-import ro.spital.models.TipPersonal;
+import ro.spital.models.ETipPersonal;
 
 public class FactoryPersonalFactPattern {
-    public static PersonalSpitalPattern crearePersonal(TipPersonal tip, String nume) {
+    public static PersonalSpitalPattern crearePersonal(ETipPersonal tip, String nume) {
         switch (tip) {
             case ASISTENT:
                 return new Asistent(nume);

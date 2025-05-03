@@ -1,5 +1,5 @@
 package ro.spital.factoryPattern;
 
-public interface FactoryPersonalInterface {
+public interface IFactoryPersonalInterface {
     PersonalSpitalPattern crearePersonal(String nume);
 }

@@ -1,6 +1,6 @@
 package ro.spital.prototype;
 
-public class Reteta implements Prototype {
+public class Reteta implements IPrototype {
     private String nume;
     private String ingrediente;
     private double cantitate;
