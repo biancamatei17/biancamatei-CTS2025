@@ -1,6 +1,6 @@
 package ro.restaurant.factoryMethod;
 
-public class SupaDeCiuperci implements IFelMancare{
+public class SupaDeCiuperciFactory implements IFelMancare{
     @Override
     public String getDenumire() {
         return "Supa de ciuperci";

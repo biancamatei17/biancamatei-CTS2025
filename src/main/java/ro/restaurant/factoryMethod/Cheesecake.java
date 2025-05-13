@@ -1,6 +1,6 @@
 package ro.restaurant.factoryMethod;
 
-public class Cheescake implements IFelMancare {
+public class Cheesecake implements IFelMancare {
     @Override
     public String getDenumire() {
         return "Cheesecake";

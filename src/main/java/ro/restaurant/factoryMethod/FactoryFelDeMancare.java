@@ -1,4 +1,5 @@
 package ro.restaurant.factoryMethod;
 
-public class FactoryFelDeMancare {
+public abstract class FactoryFelDeMancare {
+    public abstract IFelMancare createFelMancare(String tip);
 }
