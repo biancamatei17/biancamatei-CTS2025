@@ -1,7 +1,18 @@
 package ro.restaurant.main;
 
+import ro.restaurant.adapter.AdapterSoftBar;
+import ro.restaurant.adapter.ISoftBucatarie;
+import ro.restaurant.adapter.SoftNouBar;
+import ro.restaurant.adapter.SoftVechiBucatarie;
 import ro.restaurant.builder.Rezervare;
 import ro.restaurant.builder.RezervareBuilder;
+import ro.restaurant.composite.CategorieMeniu;
+import ro.restaurant.composite.IComponentaMeniu;
+import ro.restaurant.composite.ProdusMeniu;
+import ro.restaurant.decorator.DecoratorLaMultiAni;
+import ro.restaurant.decorator.INotaDePlata;
+import ro.restaurant.decorator.NotaDePlata;
+import ro.restaurant.facade.ModulReceptionist;
 import ro.restaurant.factory.ETipSupa;
 import ro.restaurant.factory.ISupa;
 import ro.restaurant.factory.SupaFactory;
@@ -75,6 +86,78 @@ public class Main {
         clientClona2.afiseazaDetalii();
         System.out.println();
 
+        // Cerinta 5
 
+        ISoftBucatarie softBucatarie = new SoftVechiBucatarie();
+        softBucatarie.printeazaFactura(87.5);
+
+        System.out.println();
+
+        SoftNouBar softNou = new SoftNouBar();
+        ISoftBucatarie adapterBar = new AdapterSoftBar(softNou, "Zona Bar");
+        adapterBar.printeazaFactura(45.0);
+
+        System.out.println();
+
+        // Cerinta 6
+
+        ModulReceptionist modul = new ModulReceptionist();
+
+        int masa1 = 6;
+        System.out.println("\nVerificare pentru masa " + masa1);
+        if (modul.poateFiOcupataMasa(masa1)) {
+            System.out.println("Masa " + masa1 + " poate fi ocupată.");
+        } else {
+            System.out.println("Masa " + masa1 + " NU poate fi ocupată.");
+        }
+
+        int masa2 = 15;
+        System.out.println("\nVerificare pentru masa " + masa2);
+        if (modul.poateFiOcupataMasa(masa2)) {
+            System.out.println("Masa " + masa2 + " poate fi ocupată.");
+        } else {
+            System.out.println("Masa " + masa2 + " NU poate fi ocupată.");
+        }
+
+        System.out.println();
+
+        // Cerinta 7
+        INotaDePlata notaSimpla = new NotaDePlata(123.5);
+        System.out.println("Nota fara decorare");
+        notaSimpla.printeazaNota();
+
+        System.out.println("\nNota cu felicitare");
+        INotaDePlata notaDecorata = new DecoratorLaMultiAni(notaSimpla);
+        notaDecorata.printeazaNota();
+
+        System.out.println();
+
+        // Cerinta 8
+
+        CategorieMeniu meniuPrincipal = new CategorieMeniu("Meniu");
+        CategorieMeniu bauturi = new CategorieMeniu("Bauturi");
+        CategorieMeniu sucuri = new CategorieMeniu("Sucuri");
+        CategorieMeniu cafea = new CategorieMeniu("Cafea");
+
+
+        IComponentaMeniu apaPlata = new ProdusMeniu("Apa plata");
+        IComponentaMeniu apaMinerala = new ProdusMeniu("Apa minerala");
+        IComponentaMeniu cola = new ProdusMeniu("Coca Cola");
+        IComponentaMeniu espresso = new ProdusMeniu("Espresso");
+
+
+        sucuri.adaugaComponenta(cola);
+        sucuri.adaugaComponenta(apaPlata);
+        sucuri.adaugaComponenta(apaMinerala);
+
+        cafea.adaugaComponenta(espresso);
+
+        bauturi.adaugaComponenta(sucuri);
+        bauturi.adaugaComponenta(cafea);
+
+        meniuPrincipal.adaugaComponenta(bauturi);
+        meniuPrincipal.afiseaza("");
     }
 }
+
+
