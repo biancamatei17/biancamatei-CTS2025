@@ -106,17 +106,17 @@ public class Main {
         int masa1 = 6;
         System.out.println("\nVerificare pentru masa " + masa1);
         if (modul.poateFiOcupataMasa(masa1)) {
-            System.out.println("Masa " + masa1 + " poate fi ocupată.");
+            System.out.println("Masa " + masa1 + " poate fi ocupata.");
         } else {
-            System.out.println("Masa " + masa1 + " NU poate fi ocupată.");
+            System.out.println("Masa " + masa1 + " NU poate fi ocupata.");
         }
 
         int masa2 = 15;
         System.out.println("\nVerificare pentru masa " + masa2);
         if (modul.poateFiOcupataMasa(masa2)) {
-            System.out.println("Masa " + masa2 + " poate fi ocupată.");
+            System.out.println("Masa " + masa2 + " poate fi ocupata.");
         } else {
-            System.out.println("Masa " + masa2 + " NU poate fi ocupată.");
+            System.out.println("Masa " + masa2 + " NU poate fi ocupata.");
         }
 
         System.out.println();
