@@ -12,6 +12,9 @@ import ro.restaurant.composite.ProdusMeniu;
 import ro.restaurant.decorator.DecoratorLaMultiAni;
 import ro.restaurant.decorator.INotaDePlata;
 import ro.restaurant.decorator.NotaDePlata;
+import ro.restaurant.decorator1.IRezervarePersoane;
+import ro.restaurant.decorator1.RezervareCuLimitare;
+import ro.restaurant.decorator1.RezervarePersoaneStandard;
 import ro.restaurant.facade.ModulReceptionist;
 import ro.restaurant.factory.ETipSupa;
 import ro.restaurant.factory.ISupa;
@@ -20,7 +23,11 @@ import ro.restaurant.factoryMethod.FactoryDesert;
 import ro.restaurant.factoryMethod.FactoryFelDeMancare;
 import ro.restaurant.factoryMethod.FactorySupa;
 import ro.restaurant.factoryMethod.IFelMancare;
+import ro.restaurant.flyweight.ClientFact;
+import ro.restaurant.flyweight.ClientFly;
+import ro.restaurant.flyweight.RezervareFly;
 import ro.restaurant.prototype.Client;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -157,6 +164,38 @@ public class Main {
 
         meniuPrincipal.adaugaComponenta(bauturi);
         meniuPrincipal.afiseaza("");
+
+        System.out.println();
+        // Cerinta 9
+
+        IRezervarePersoane rezervareStandard = new RezervarePersoaneStandard();
+        IRezervarePersoane rezervareControlata = new RezervareCuLimitare(rezervareStandard);
+
+        System.out.println("Test 1: 2 persoane");
+        rezervareControlata.realizeazaRezervare(2);
+
+        System.out.println("\nTest 2: 4 persoane");
+        rezervareControlata.realizeazaRezervare(4);
+
+        System.out.println("\nTest 3: 6 persoane");
+        rezervareControlata.realizeazaRezervare(6);
+
+        System.out.println();
+
+        // Cerinta 10
+
+        ClientFact factory = new ClientFact();
+
+        ClientFly client1 = factory.getClientFly("Ion Popescu", "0711222333", "ion@email.com");
+        ClientFly client2 = factory.getClientFly("Ion Popescu", "0711222333", "ion@email.com"); // va fi acelasi
+
+        RezervareFly r1 = new RezervareFly(5, 2, "18:00");
+        RezervareFly r2 = new RezervareFly(8, 4, "19:30");
+        RezervareFly r3 = new RezervareFly(3, 6, "20:00");
+
+        r1.afiseaza(client1);
+        r2.afiseaza(client2);
+        r3.afiseaza(client1);
     }
 }
 
